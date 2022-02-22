@@ -5,6 +5,8 @@ coverage
 .env
 tmp
 
+public/storage
+
 # Logs
 logs
 *.log

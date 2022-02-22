@@ -9,7 +9,7 @@ export default class UsersController {
   /**
    * Get user
    */
-  private async show({ request }) {
+  public async show({ request }) {
     const userId = request.param('user')
 
     try {
@@ -27,7 +27,7 @@ export default class UsersController {
   /**
    * Update user
    */
-  private async update({ auth, request }) {
+  public async update({ auth, request }) {
     const userId = request.param('user')
     const payload = await request.validate(UpdateUserValidator)
 
@@ -53,7 +53,7 @@ export default class UsersController {
   /**
    * Store user
    */
-  private async store({ request }) {
+  public async store({ request }) {
     const payload = await request.validate(CreateUserValidator)
 
     if (await User.findBy('email', payload.email)) {

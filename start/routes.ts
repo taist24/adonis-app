@@ -35,5 +35,9 @@ Route.group(() => {
     Route.get('/users/:user', 'UsersController.show')
     Route.post('/users/store', 'UsersController.store')
     Route.patch('/users/:user', 'UsersController.update')
+
+    Route.resource('/user/profile', 'ProfilesController').only(['store', 'index'])
+    Route.patch('/user/profile', 'ProfilesController.update')
+    Route.delete('/user/profile', 'ProfilesController.destroy')
   }).middleware(['auth'])
 }).prefix('api/v1')

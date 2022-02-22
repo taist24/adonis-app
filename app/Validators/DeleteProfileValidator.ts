@@ -1,7 +1,7 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class LoginValidator {
+export default class DeleteProfileValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -25,7 +25,6 @@ export default class LoginValidator {
    */
   public schema = schema.create({
     phone: schema.string({}, [rules.mobile()]),
-    password: schema.string({}, [rules.minLength(8), rules.maxLength(255), rules.confirmed()]),
   })
 
   /**

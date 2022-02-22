@@ -1,7 +1,8 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Profile from 'App/Models/Profile'
 
-export default class LoginValidator {
+export default class UpdateProfileValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,8 +25,16 @@ export default class LoginValidator {
    *    ```
    */
   public schema = schema.create({
-    phone: schema.string({}, [rules.mobile()]),
-    password: schema.string({}, [rules.minLength(8), rules.maxLength(255), rules.confirmed()]),
+    firstName: schema.string.optional({}, [rules.minLength(3), rules.maxLength(255)]),
+    lastName: schema.string.optional({}, [rules.minLength(3), rules.maxLength(255)]),
+    birthdate: schema.date.optional({
+      format: 'y-m-d',
+    }),
+    email: schema.string.optional({}, [rules.email()]),
+    gender: schema.enum.optional(Object.values(Profile.GenderEnum)),
+    avatar: schema.file.optional({
+      extnames: ['png', 'jpg', 'jpeg'],
+    }),
   })
 
   /**

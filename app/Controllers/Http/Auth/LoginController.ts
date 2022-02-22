@@ -8,15 +8,15 @@ export default class LoginController {
   /**
    * Login user
    */
-  private async handle({ auth, request }) {
+  public async handle({ auth, request }) {
     const payload = await request.validate(LoginValidator)
 
     try {
-      const authentication = await auth.attempt(payload.email, payload.password)
-      const user = await User.findByOrFail('email', payload.email)
+      const user = await User.findByOrFail('phone', payload.phone)
+      const authentication = await auth.login(user)
       return { data: { ...user.toJSON(), authentication } }
     } catch (error) {
-      if (error.name === 'InvalidCredentialsException') {
+      if (error.code === 'E_ROW_NOT_FOUND') {
         throw new HttpException('The email or password is invalid', 422)
       }
       throw error

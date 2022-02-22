@@ -24,7 +24,7 @@ export default class SignUpValidator {
    *    ```
    */
   public schema = schema.create({
-    email: schema.string({}, [rules.email()]),
+    phone: schema.string({}, [rules.mobile()]),
     password: schema.string({}, [rules.minLength(8), rules.maxLength(255), rules.confirmed()]),
   })
 
